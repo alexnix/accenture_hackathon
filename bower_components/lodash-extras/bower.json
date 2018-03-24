@@ -1,0 +1,45 @@
+{
+  "name": "lodash-extras",
+  "version": "0.0.12",
+  "homepage": "https://github.com/rjhilgefort/lodash-extras",
+  "authors": [
+    "Rob Hilgefort <rjhilgefort@gmail.com>"
+  ],
+  "contributors": [
+    {
+      "name": "Ross Hadden",
+      "url": "https://github.com/rosshadden"
+    },
+    {
+      "name": "Andrew Orahoske",
+      "url": "https://github.com/AO16"
+    },
+    {
+      "name": "Nick Jutte",
+      "url": "https://github.com/njutte"
+    }
+  ],
+  "description": "An opinionated lodash mod with extras",
+  "main": "dist/client/lodash-extras.js",
+  "keywords": [
+    "lodash",
+    "extras",
+    "contrib"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "src",
+    ".editorconfig",
+    ".gitignore",
+    "bower.json",
+    "dist/server",
+    "package.json",
+    "gulpfile.js",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "4.6.1"
+  }
+}

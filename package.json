@@ -22,6 +22,7 @@
   "homepage": "https://github.com/neogeek/pwa-starter-kit#readme",
   "dependencies": {
     "angular": "^1.6.9",
+    "angular-material": "http://github.com/angular/bower-material/tarball/master",
     "bootstrap": "^4.0.0",
     "sweetalert": "^2.1.0"
   }

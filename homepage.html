@@ -8,6 +8,35 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel='stylesheet' href='bower_components/angular-material/angular-material.min.css' />
+    <link rel='stylesheet' href='bower_components/md-data-table/dist/md-data-table-style.css' />
+    <link rel="stylesheet" href='bower_components/angular-material-icons/angular-material-icons.css'>
+    <link rel='stylesheet' href='bower_components/md-data-table/dist/md-data-table-style.css' />
+    <link rel='stylesheet' href='bower_components/angular-material-data-table/dist/md-data-table.min.css' />
+
+    <script src='bower_components/angular/angular.min.js'></script>
+    <script src='bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+    <script src='bower_components/angular-sanitize/angular-sanitize.min.js'></script>
+    <script src='bower_components/angular-animate/angular-animate.min.js'></script>
+    <script src='bower_components/angular-aria/angular-aria.min.js'></script>
+    <script src='bower_components/angular-mocks/angular-mocks.js'></script>
+    <script src='bower_components/angular-material/angular-material.min.js'></script>
+    <script src='bower_components/angular-messages/angular-messages.min.js'></script>
+    <script src='bower_components/ng-table/dist/ng-table.min.js'></script>
+    <script src='bower_components/lodash/dist/lodash.min.js'></script>
+    <script src='bower_components/lodash-extras/dist/client/lodash-extras.min.js'></script>
+    <script src='bower_components/md-data-table/dist/md-data-table-templates.js'></script>
+    <script src='bower_components/md-data-table/dist/md-data-table.js'></script>
+    <script src='bower_components/angular-material-icons/angular-material-icons.min.js'></script>
+    <script src='bower_components/md-data-table/dist/md-data-table.js'></script>
+    <script src='bower_components/md-data-table/dist/md-data-table-templates.js'></script>
+    <script src='bower_components/angular-material-data-table/dist/md-data-table.min.js'></script>   
+
+    <!-- <script src="/bower_components/angular-jk-rating-stars.js"></script>
+    <link href="/bower_components/angular-jk-rating-stars.css" rel="stylesheet" type="text/css" /> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
     <div id="map"></div>
@@ -24,7 +53,7 @@
           </div>
         </md-card>
         <md-card>
-          <md-button>Adauga Eveniment</md-button>
+          <md-button>Add event</md-button>
         </md-card>
       </div>
 
@@ -33,7 +62,92 @@
           <span>
             <i class="fas fa-angle-left"></i> Evenimente
           </span>
-        </div>
+        </md-card>
+        <div ng-controller="locationCtrl" layout="column" ng-cloak class="md-inline-form" id="smsLogTab">
+          <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+              <div>
+              <md-input-container>
+                  <label>User</label>
+                  <input ng-model="user.username">
+              </md-input-container>
+            </md-content>
+            <div ng-repeat="institution in institutions">
+              <md-content class="md-padding" layout-xs="column" layout="row">
+                  <div flex-xs flex-gt-xs="50" layout="column">
+                      <md-card md-theme="dark-blue" md-theme-watch>
+                          <md-card-title>
+                          <md-card-title-text>
+                              <span class="md-headline">{{institution.title}}</span>
+                              <span class="md-subhead">{{institution.adress}}</span>
+                              <span>{{institution.phoneNumber + " " + institution.email}}</span>
+                              <span>{{institution.ratio}}</span>
+                              <span>{{institution.rating}}</span>
+                              <!-- <jk-rating-stars max-rating="8" rating="ctrl.rating" read-only="ctrl.readOnly" on-rating="ctrl.onRating(rating)" >
+                                  </jk-rating-stars> -->
+                          </md-card-title-text>
+                          <md-card-title-media>
+                              <div class="md-media-md card-media"></div>
+                          </md-card-title-media>
+                          </md-card-title>
+                          <md-card-actions layout="row" layout-align="end center">
+                          <md-button ng-click="editInstitution()">Edit</md-button>
+                          </md-card-actions>
+                      </md-card>
+                  </div>
+              </md-content>
+          </div>
+            <md-content layout-padding>
+              <div>
+                <form name="locationForm">
+                  <md-input-container>
+                    <label>Address</label>
+                    <input ng-model="location.address">
+                  </md-input-container>
+                  <md-input-container>
+                      <label>Email</label>
+                      <input ng-model="location.email" type="email">
+                  </md-input-container>
+                  <md-input-container class="md-block">
+                      <label>Phone Number</label>
+                      <input name="phone" ng-model="location.phoneNumber" ng-pattern="/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/" md-maxlength="10">
+                          <div ng-messages="phone.$error" role="alert" ng-show="showHints" multiple>
+                              <div ng-message="pattern" class="my-message">The phone number must contain only digits.</div>
+                              <div ng-message="md-maxlength" class="my-message">The phone number must have 10 digits.</div>
+                          </div>
+                  </md-input-container>
+                  <div layout-gt-sm="row">
+                      <md-input-container class="md-block marginFilters" style="margin-top:18px;margin-right:5px;" flex-gt-sm="35">
+                          <label>Woman number</label>
+                          <input ng-model="location.wNumber">
+                      </md-input-container>
+                      <md-input-container class="md-block" flex-gt-sm="5"></md-input-container>
+                      <md-input-container class="md-block marginFilters" style="margin-top:18px;margin-right:5px;" flex-gt-sm="35">
+                          <label>Man number</label>
+                          <input ng-model="location.mNumber">
+                      </md-input-container>
+                  </div>  
+                  
+                  <md-input-container class="md-block">
+                      <label>Description</label>
+                      <textarea ng-model="location.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                  </md-input-container>   
+                  <div layout="row" ng-repeat="project in location.projects track by $index" ng-show="isEditMode">
+                          <md-input-container class="md-block marginFilters" style="margin-top:18px;margin-right:5px;" flex-gt-sm="35">
+                              <label>Title</label>
+                              <input ng-model="project.title">
+                          </md-input-container>
+                          <md-input-container class="md-block" flex-gt-sm="5"></md-input-container>
+                          <md-input-container class="md-block marginFilters" style="margin-top:18px;margin-right:5px;" flex-gt-sm="35">
+                                  <label>Description</label>
+                                  <input ng-model="project.description">
+                          </md-input-container>
+                      <md-button class="md-fab md-mini md-primary" ng-click="addProject()" ng-show="$index == location.projects.length-1">+</md-button>
+                  </div>
+                </form>
+                <md-button class="md-raised md-primary" ng-click="addInstitution(location)">ADD</md-button>
+              </div>
+        </md-content> 
+      </div>
       </div>
     </div>
 
@@ -47,5 +161,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
     <script src="src/map_style.js"></script>
     <script src="src/index.js"></script>
+    <script src="src/location.js"></script>
   </body>
 </html>

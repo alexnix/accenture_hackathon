@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngMaterial'])
+var app = angular.module("app", ['ngSanitize', 'ngMaterial', 'ngMessages', 'ngMdIcons', 'mdDataTable', 'md.data.table']);
 
 app.run(function($http, $rootScope){
 
