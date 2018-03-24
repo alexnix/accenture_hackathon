@@ -3,5 +3,26 @@
   "devDependencies": {
     "@neogeek/eslint-config-standards": "1.15.0",
     "eslint": "3.19.0"
+  },
+  "name": "pwa-starter-kit",
+  "description": "[![](https://img.shields.io/badge/Lighthouse%20Report-100%25-brightgreen.svg?style=flat)](https://github.com/GoogleChrome/Lighthouse/)",
+  "version": "1.0.0",
+  "main": "serviceWorker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neogeek/pwa-starter-kit.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/neogeek/pwa-starter-kit/issues"
+  },
+  "homepage": "https://github.com/neogeek/pwa-starter-kit#readme",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "bootstrap": "^4.0.0",
+    "sweetalert": "^2.1.0"
   }
 }
