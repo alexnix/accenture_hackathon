@@ -4,6 +4,7 @@ app.controller('locationCtrl', ['$scope', '$http', '$q', function ($scope, $http
     $scope.count = 1;
     $scope.isEditMode = false;
     $scope.institutions = [];
+    $scope.isLogged = false;
 
     $scope.location = {
         address: null,
@@ -15,6 +16,24 @@ app.controller('locationCtrl', ['$scope', '$http', '$q', function ($scope, $http
         mCount: null,
         projects: []
       };
+      $scope.institution = {
+            address: "Flat 7, Ghani Baloch Court",
+            phone: "1234567890",
+            email: "ioana@ioana.com",
+            name: "ioana's building",
+            contact_name: "ioana",
+            description: "this is ioana's building.",
+            member_count: "47",
+            women_count: "46"
+      };
+      $scope.computePercentage = function(w, m) {
+        if(typeof(m) == "string" && typeof(w) == "string") {
+            m = Number(m);
+            w = Number(w);
+        }
+        return Math.round((w*100) / m);
+      };
+      $scope.institutions.push($scope.institution);
       $scope.project = {title: null, description: null};
       if($scope.location.projects && $scope.location.projects.length == 0)
         $scope.location.projects.push($scope.project);
@@ -48,6 +67,7 @@ app.controller('locationCtrl', ['$scope', '$http', '$q', function ($scope, $http
     //         .success(function(response) {
     //             deffered.resolve(response);
     //             $scope.user = response;
+    //             $scope.isLogged = true;
     //         }).error(function(data, status, headers, config) {
     //             deffered.reject(data);
     //     });

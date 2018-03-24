@@ -34,9 +34,7 @@
     <script src='bower_components/md-data-table/dist/md-data-table-templates.js'></script>
     <script src='bower_components/angular-material-data-table/dist/md-data-table.min.js'></script>   
 
-    <!-- <script src="/bower_components/angular-jk-rating-stars.js"></script>
-    <link href="/bower_components/angular-jk-rating-stars.css" rel="stylesheet" type="text/css" /> -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/5star.css">
   </head>
   <body>
     <div id="map"></div>
@@ -64,38 +62,39 @@
           </span>
         </md-card>
         <div ng-controller="locationCtrl" layout="column" ng-cloak class="md-inline-form" id="smsLogTab">
-          <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-              <div>
-              <md-input-container>
-                  <label>User</label>
-                  <input ng-model="user.username">
-              </md-input-container>
-            </md-content>
             <div ng-repeat="institution in institutions">
               <md-content class="md-padding" layout-xs="column" layout="row">
-                  <div flex-xs flex-gt-xs="50" layout="column">
-                      <md-card md-theme="dark-blue" md-theme-watch>
+                  <div flex-xs flex-gt-xs="150" layout="column">
+                      <md-content md-theme="dark-blue" md-theme-watch>
                           <md-card-title>
                           <md-card-title-text>
-                              <span class="md-headline">{{institution.title}}</span>
-                              <span class="md-subhead">{{institution.adress}}</span>
-                              <span>{{institution.phoneNumber + " " + institution.email}}</span>
-                              <span>{{institution.ratio}}</span>
-                              <span>{{institution.rating}}</span>
-                              <!-- <jk-rating-stars max-rating="8" rating="ctrl.rating" read-only="ctrl.readOnly" on-rating="ctrl.onRating(rating)" >
-                                  </jk-rating-stars> -->
+                              <span class="md-headline">{{ "Name : " + institution.name.toUpperCase()}}</span>
+                              </br>
+                              <span class="md-subhead">{{"Address : " + institution.address}}</span>
+                              </br>
+                              <span class="md-subhead">{{"Contact : " + institution.phone + " - " + institution.email}}</span>
+                              </br>
+                              <span class="md-subhead">{{"Women percentage : " + computePercentage(institution.women_count, institution.member_count) + "%"}}</span>
+                              </br>
+                              <span class="md-subhead">{{institution.rating}}</span>
+                              <ul class="rate-area">
+                                <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Amazing">5 stars</label>
+                                <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="Good">4 stars</label>
+                                <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="Average">3 stars</label>
+                                <input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not Good">2 stars</label>
+                                <input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Bad">1 star</label>
+                              </ul>
                           </md-card-title-text>
                           <md-card-title-media>
                               <div class="md-media-md card-media"></div>
                           </md-card-title-media>
                           </md-card-title>
-                          <md-card-actions layout="row" layout-align="end center">
-                          <md-button ng-click="editInstitution()">Edit</md-button>
-                          </md-card-actions>
-                      </md-card>
+                          <md-button ng-show="isLogged" ng-click="editInstitution()">Edit</md-button>
+                      </md-content>
                   </div>
               </md-content>
           </div>
+          <div ng-show="isEditMode">
             <md-content layout-padding>
               <div>
                 <form name="locationForm">
@@ -146,7 +145,8 @@
                 </form>
                 <md-button class="md-raised md-primary" ng-click="addInstitution(location)">ADD</md-button>
               </div>
-        </md-content> 
+          </md-content> 
+        </div>
       </div>
       </div>
     </div>
