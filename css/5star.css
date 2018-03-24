@@ -19,7 +19,7 @@ h3 {
 }
 
 .rate-area:not(:checked) > label {
-    float:left;
+    float:right;
     width:1em;
     padding:0 .1em;
     overflow:hidden;
